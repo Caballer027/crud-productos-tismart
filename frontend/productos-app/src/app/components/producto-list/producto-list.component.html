@@ -1,0 +1,78 @@
+<div class="page-header">
+  <h2>Listado de Productos</h2>
+  <a routerLink="/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+</div>
+
+<!-- Filtros -->
+<div class="filters">
+  <input class="form-control"
+         [(ngModel)]="filtroMarca"
+         placeholder="Filtrar por marca"
+         (keyup.enter)="buscar()" />
+  <input class="form-control"
+         [(ngModel)]="filtroModelo"
+         placeholder="Filtrar por modelo"
+         (keyup.enter)="buscar()" />
+  <button class="btn btn-primary"   (click)="buscar()">Buscar</button>
+  <button class="btn btn-secondary" (click)="limpiar()">Limpiar</button>
+</div>
+
+@if (errorMsg) {
+  <div class="alert alert-danger">{{ errorMsg }}</div>
+}
+
+<!-- Tabla -->
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Estado</th>
+      <th style="width:190px">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (p of productos; track p.idProducto) {
+      <tr>
+        <td>{{ p.codigo }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.marca }}</td>
+        <td>{{ p.modelo }}</td>
+        <td>S/ {{ p.precio | number:'1.2-2' }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+          <span [class]="p.estado === 'A' ? 'badge badge-active' : 'badge badge-inactive'">
+            {{ p.estado === 'A' ? 'Activo' : 'Inactivo' }}
+          </span>
+        </td>
+        <td class="acciones">
+          <a [routerLink]="['/detalle', p.idProducto]" class="btn btn-sm btn-info">Ver</a>
+          <a [routerLink]="['/editar',  p.idProducto]" class="btn btn-sm btn-warning">Editar</a>
+          <button class="btn btn-sm btn-danger" (click)="eliminar(p.idProducto, p.nombre)">Eliminar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr class="empty-row">
+        <td colspan="8">No se encontraron productos.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<!-- Paginación -->
+<div class="paginacion">
+  <button class="btn btn-secondary btn-sm"
+          (click)="anterior()"
+          [disabled]="currentPage === 0">← Anterior</button>
+  <span class="pag-info">
+    Página <strong>{{ currentPage + 1 }}</strong> de <strong>{{ totalPages || 1 }}</strong>
+    &nbsp;·&nbsp; {{ totalElements }} registros
+  </span>
+  <button class="btn btn-secondary btn-sm"
+          (click)="siguiente()"
+          [disabled]="currentPage >= totalPages - 1">Siguiente →</button>
+</div>

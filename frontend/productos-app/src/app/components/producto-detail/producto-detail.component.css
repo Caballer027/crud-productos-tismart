@@ -1,0 +1,23 @@
+.header-actions { display: flex; gap: .6rem; }
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.detail-table th,
+.detail-table td {
+  padding: .7rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
+}
+.detail-table th {
+  width: 130px;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  background: #f8faff;
+}
+.detail-table tbody tr:last-child th,
+.detail-table tbody tr:last-child td { border-bottom: none; }

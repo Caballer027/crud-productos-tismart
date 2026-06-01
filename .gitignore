@@ -1,0 +1,27 @@
+# ===== Archivo de contexto de Claude Code (no es parte del entregable) =====
+CLAUDE.md
+
+# ===== Backend (Java / Maven / Spring Boot) =====
+backend/target/
+*.class
+*.jar
+*.war
+*.log
+
+# ===== Frontend (Angular / Node) =====
+frontend/productos-app/node_modules/
+frontend/productos-app/dist/
+frontend/productos-app/.angular/
+npm-debug.log*
+
+# ===== IDE / Editor =====
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# ===== Sistema operativo =====
+Thumbs.db
+.DS_Store

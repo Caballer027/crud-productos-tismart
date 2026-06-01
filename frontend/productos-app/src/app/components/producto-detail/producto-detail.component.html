@@ -1,0 +1,56 @@
+<div class="page-header">
+  <h2>Detalle del Producto</h2>
+  <div class="header-actions">
+    @if (producto) {
+      <a [routerLink]="['/editar', producto.idProducto]" class="btn btn-warning">Editar</a>
+    }
+    <a routerLink="/" class="btn btn-secondary">← Volver</a>
+  </div>
+</div>
+
+@if (producto) {
+  <div class="card">
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{ producto.idProducto }}</td>
+          <th>Código</th>
+          <td>{{ producto.codigo }}</td>
+        </tr>
+        <tr>
+          <th>Nombre</th>
+          <td colspan="3">{{ producto.nombre }}</td>
+        </tr>
+        <tr>
+          <th>Marca</th>
+          <td>{{ producto.marca }}</td>
+          <th>Modelo</th>
+          <td>{{ producto.modelo }}</td>
+        </tr>
+        <tr>
+          <th>Precio</th>
+          <td>S/ {{ producto.precio | number:'1.2-2' }}</td>
+          <th>Stock</th>
+          <td>{{ producto.stock }} unidades</td>
+        </tr>
+        <tr>
+          <th>Estado</th>
+          <td>
+            <span [class]="producto.estado === 'A' ? 'badge badge-active' : 'badge badge-inactive'">
+              {{ producto.estado === 'A' ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <th>Creado</th>
+          <td>{{ producto.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+        @if (producto.fechaModif) {
+          <tr>
+            <th>Modificado</th>
+            <td colspan="3">{{ producto.fechaModif | date:'dd/MM/yyyy HH:mm' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
